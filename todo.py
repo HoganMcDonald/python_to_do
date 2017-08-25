@@ -1,4 +1,5 @@
 # to do app used in the command line
+import os
 
 
 to_dos = []
@@ -9,14 +10,21 @@ def instructions():
     print('''instructions: 
     type ADD to add new to do.
     type REMOVE to remove to do from list.
-    type LIST to see list.''')
+    type LIST to see list.
+    type EMPTY to clear the screen.''')
     interface()
+
+
+# clears the screen when called.
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+    instructions()
 
 
 # add a new to do
 def add_to_do(text):
     to_dos.append(text)
-    print('added ', text)
+    print('added ' + text)
     interface()
 
 
@@ -31,9 +39,9 @@ def remove_to_do(index):
 def show_to_dos(bool):
     if len(to_dos) > 1:
         for i in range(len(to_dos)):
-            print(i + 1, '.  {}'.format(to_dos[i]))
+            print('{}.  {}'.format(str(i + 1), to_dos[i]))
     elif len(to_dos) == 1:
-        print(1, '.  {}'.format(to_dos[0]))
+        print('1.  {}'.format(to_dos[0]))
     else:
         print('Nothing to show here. You can add to your list with ADD!')
     if not bool:
@@ -42,7 +50,7 @@ def show_to_dos(bool):
 
 # interface with user
 def interface():
-    command = input()
+    command = input('>>')
     if command.lower() == 'add':
         text = input('What do you need to do?   ')
         add_to_do(text)
@@ -56,6 +64,8 @@ def interface():
             interface()
     elif command.lower() == 'list':
         show_to_dos(False)
+    elif command.lower() == 'empty':
+        clear_screen()
     else:
         print('I don\'t know that command! Try one of these.')
         instructions()
