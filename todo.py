@@ -22,13 +22,13 @@ def add_to_do(text):
 
 # remove a to do at a specific index
 def remove_to_do(index):
+    print('{} was removed from the list.'.format(to_dos[index]))
     del to_dos[index]
-    print('removed', index)
     interface()
 
 
 # show all to dos in list
-def show_to_dos():
+def show_to_dos(bool):
     if len(to_dos) > 1:
         for i in range(len(to_dos)):
             print(i + 1, '.  {}'.format(to_dos[i]))
@@ -36,7 +36,8 @@ def show_to_dos():
         print(1, '.  {}'.format(to_dos[0]))
     else:
         print('Nothing to show here. You can add to your list with ADD!')
-    interface()
+    if not bool:
+        interface()
 
 
 # interface with user
@@ -46,11 +47,11 @@ def interface():
         text = input('What do you need to do?   ')
         add_to_do(text)
     elif command.lower() == 'remove':
-        show_to_dos()
-        index = input('Which to do would you like to remove?   ')
+        show_to_dos(True)
+        index = int(input('Which to do would you like to remove?   ')) - 1
         remove_to_do(index)
     elif command.lower() == 'list':
-        show_to_dos()
+        show_to_dos(False)
     else:
         print('I don\'t know that command! Try one of these.')
         instructions()
