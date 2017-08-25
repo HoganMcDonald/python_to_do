@@ -11,7 +11,8 @@ def instructions():
     type ADD to add new to do.
     type REMOVE to remove to do from list.
     type LIST to see list.
-    type EMPTY to clear the screen.''')
+    type EMPTY to clear the screen.
+    type HELP to pull up these instructions again.''')
     interface()
 
 
@@ -30,7 +31,7 @@ def add_to_do(text):
 
 # remove a to do at a specific index
 def remove_to_do(index):
-    print('{} was removed from the list.'.format(to_dos[index]))
+    print('"{}" was removed from the list.'.format(to_dos[index]))
     del to_dos[index]
     interface()
 
@@ -66,6 +67,8 @@ def interface():
         show_to_dos(False)
     elif command.lower() == 'empty':
         clear_screen()
+    elif command.lower() == 'help':
+        instructions()
     else:
         print('I don\'t know that command! Try one of these.')
         instructions()
