@@ -47,9 +47,13 @@ def interface():
         text = input('What do you need to do?   ')
         add_to_do(text)
     elif command.lower() == 'remove':
-        show_to_dos(True)
-        index = int(input('Which to do would you like to remove?   ')) - 1
-        remove_to_do(index)
+        if len(to_dos):
+            show_to_dos(True)
+            index = int(input('Which to do would you like to remove?   ')) - 1
+            remove_to_do(index)
+        else:
+            print('You have an empty list.')
+            interface()
     elif command.lower() == 'list':
         show_to_dos(False)
     else:
